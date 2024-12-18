@@ -1,0 +1,23 @@
+//Pasos para arracar el proyecto del framework de jest con puppeteer
+
+npm init -y
+
+git init
+
+npm i puppeteer jest jest-puppeteer @types/jest babel-jest @babel/core @babel/preset-env
+
+Crear .gitignore
+
+node_modules.bin\jest --init //--> Esto inicializa la config de jest (Windows 10)
+
+Respuestas: √ Would you like to use Jest when running "test" script in "package.json"? ... yes √ Would you like to use Typescript for the configuration file? ... no √ Choose the test environment that will be used for testing » node √ Do you want Jest to add coverage reports? ... no √ Which provider should be used to instrument code for coverage? » babel √ Automatically clear mock calls, instances, contexts and results before every test? ... no
+
+En jest.config.js, descomentar y colocar {bail: 5, preset: "jest-puppeteer"}
+
+Crear archivo jest-puppeteer.config.js y pegarle dentro: module.exports = { launch:{ headless: false, slowMo:100, }, browserContext: 'default', };
+
+Crear archivo de babel.config.js y pegarle dentro: module.exports = { presets: [ [ '@babel/preset-env', { targets: { node: 'current', }, }, ], ], };
+
+Crear carpeta de pruebas test
+
+Crear una prueba para probar que todo funcione correctamente
