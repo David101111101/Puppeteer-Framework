@@ -6,7 +6,7 @@
     "test": "jest --forceExit --detectOpenHandles"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Abril>davidstevenabril@gmail.com",
   "license": "ISC",
   "description": "",
   "dependencies": {

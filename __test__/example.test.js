@@ -1,8 +1,24 @@
-/*describe('google' ,()=>{
+const puppeteer = require('puppeteer');
 
-    it('Opens the browser', async()=>{
-        await page.goto('https://www.platzi.com')
-        await new   Promise((resolve) => setTimeout(resolve, 5000));
-    },8000)
+let browser;
+let page;
 
-})*/
+beforeAll(async () => {
+    if (!browser) {
+        browser = await puppeteer.launch({
+            headless: false,
+        defaultViewport: { width: 1280, height: 800 }
+        });
+    }
+    page = await browser.newPage();
+});
+
+afterAll(async () => {
+    await browser.close();
+});
+
+describe('Google', () => {
+    it('abrir el navegador', async () => {
+        await page.goto('https://www.google.com/');
+    }, 15000);
+});

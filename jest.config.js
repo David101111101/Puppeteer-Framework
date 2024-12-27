@@ -102,6 +102,7 @@ const config = {
 
   // A preset that is used as a base for Jest's configuration
    preset: "jest-puppeteer",
+   maxWorkers: 1,
 
   // Run tests from one or more projects
   // projects: undefined,
