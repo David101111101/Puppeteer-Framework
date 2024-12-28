@@ -50,18 +50,31 @@ async getCount(selector) {
 
 async type(selector, text, opts = {}) {
     try {
-        await page.type(selector, text, opts)
+        // First using CSS selectors
+        await page.waitForSelector(selector);  // Ensure the selector is loaded
+        await page.type(selector, text, opts);  // Type in the field        
 
     } catch (e) {
+        console.log(`CSS selector failed: ${e.message}, trying XPath...`);
+        
         try {
-            const element1 = await page.waitForXPath(selector)
-            await element1.type(text)
-         } catch (e) {
+            // Fallback to XPath if CSS selector fails
+            const element1 = await page.waitForXPath(selector);
+            await element1.focus();  // Focus on the XPath element
+            await element1.type(text, opts);  // Type the text into the element
+            
+            
 
-        throw new Error(`Error while typing into selector: ${selector} - ${e.message}`);
-         }
+        } catch (xpathError) {
+            // Throw an error if both CSS and XPath fail
+            throw new Error(`Error while typing into selector: ${selector} - ${xpathError.message}`);
+        }
     }
 }
+
+
+
+
 
 async click(selector) {
     try {
@@ -72,7 +85,7 @@ async click(selector) {
             const element = await page.waitForXPath(selector)
             await element.click()  
          } catch (e) {
-            throw new Error(`Error while clicking selector: ${selector}`)
+            throw new Error(`Error while clicking selector: ${selector} - ${e.message}`)
         }
     }
 }
@@ -83,6 +96,15 @@ async doubleClick(selector) {
         await page.click(selector, { clickCount: 2 });
     } catch (err) {
         throw new Error(`Error while double-clicking selector: ${selector} - ${err.message}`);
+    }
+}
+
+async tripleClick(selector) {
+    try {
+        await page.waitForSelector(selector, { visible: true });
+        await page.click(selector, { clickCount: 3 });
+    } catch (err) {
+        throw new Error(`Error while triple-clicking selector: ${selector} - ${err.message}`);
     }
 }
 

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --forceExit --detectOpenHandles"
+    "test": "jest --forceExit --detectOpenHandles __test__/FlightReservation.test.js"
   },
   "keywords": [],
   "author": "David Abril>davidstevenabril@gmail.com",
