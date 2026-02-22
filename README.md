@@ -62,7 +62,7 @@ puppeteer-framework/
 
 ---
 
-## 🚀 Getting Started
+## 🚀   Getting Started
 
 ### Prerequisites
 - **Node.js** (v14 or higher)
